@@ -3,30 +3,19 @@ using System.Collections.Generic;
 
 namespace QuizProject
 {
-    public class ChoiceQuestion : Question
-    {
-        private List<String> choices;
-        public ChoiceQuestion()
+    public class ChoiceQuestion : Question {
+        private List<String> _Choices = new List<string>();
+        public List<String> Choices { get { return _Choices; } set { _Choices = value; } }
+
+
+        public override void display()
         {
-            choices = new List<String>();
-        }
-        public void addChoice(String choice, bool correct)
-        {
-            
-            choices.Add(choice); if (correct)
-            {
-        // Convert choices.size() to string
-        String choiceString = "" + choices.Count; setAnswer(choiceString);
-            }
-        }
-        public void display()
-        {
-            // Display the question text super.display();
-            // Display the answer choices
-            for (int i = 0; i < choices.Count; i++)
+            Console.WriteLine(Text);
+                for (int i = 0; i < Choices.Count; i++)
             {
                 int choiceNumber = i + 1;
-                Console.WriteLine(choiceNumber + ": " + choices[i]);
+                
+                Console.WriteLine(choiceNumber + ": " + Choices[i]);
                 
             }
         }

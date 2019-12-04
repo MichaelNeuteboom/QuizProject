@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuizProject
 {
@@ -6,23 +8,29 @@ namespace QuizProject
     {
         static void Main(string[] args)
         {
-            Question first = new Question();
-            first.setText("Who was the inventor of Java?"); first.setAnswer("James Gosling");
-            ChoiceQuestion second = new ChoiceQuestion();
-            second.setText("In which country was the inventor of Java born?"); second.addChoice("Australia", false);
-            second.addChoice("Canada", true);
-            second.addChoice("Denmark", false);
-            second.addChoice("United States", false);
-            presentQuestion(first);
-            presentQuestion(second);
+            IList<Question> questionsList = new List<Question>() {
+                new Question() { Text ="Who was the inventor of Java?",Answer = "James Gosling", Category = "Knowledge",Level = 4 },
+                new ChoiceQuestion() { Text = "In which country was the inventor of Java born?", Answer = "Canada", Choices = { "Australia", "Canada", "Denmark", "United States" }, Category = "Knowledge", Level = 2 }
+             };
+
+
+            IEnumerable<Question> result = questionsList.Where(s => s.Category== "Knowledge");
+            IEnumerable<Question> OrderdResult = result.OrderBy(p=> p.Level);
+            foreach(var r in OrderdResult){
+                presentQuestion(r);
+
+            }
+           // presentQuestion(questions[0]);
+            //presentQuestion(questions[1]);
         }
 
         public static void presentQuestion(Question q)
         {
             q.display();
-            System.out.print("Your answer: ");
-            Scanner in = new Scanner(System.in);
-            String response = in.nextLine(); System.out.println(q.checkAnswer(response));
+
+            Console.WriteLine("Your answer: ");
+            String response = Console.ReadLine();
+            Console.WriteLine(q.checkAnswer(response));
         }
     }
 }

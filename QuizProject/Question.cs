@@ -3,33 +3,24 @@ namespace QuizProject
 {
     public class Question
     {
-        private string text;
-        private string answer;
-      public Question()
-        {
-            text = "";
-            answer = "";
-        }
+        public string Text { get; set; }
+        public string Answer { get; set; }
+        public string Category { get; set; }
+        public int Level { get; set; }
 
-        public void setText(String questionText)
-        {
-            text = questionText;
-        }
-    
-        public void setAnswer(String correctResponse)
-        {
-            answer = correctResponse;
-        }
-    
+
+
+
+
         public bool checkAnswer(String response)
         {
             
-            return response.Equals(answer);
+            return response.Equals(Answer);
         }
    
-        public void display()
+        public virtual void display()
         {
-            Console.WriteLine(text);
+            Console.WriteLine(Text);
             
         }
     }
